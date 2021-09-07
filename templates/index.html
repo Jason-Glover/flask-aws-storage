@@ -2,14 +2,22 @@
 <html>
   <head>
   </head>
-  <body>
-    <div class="content">
+  <style>
+body {
+  background-image: url('https://raw.githubusercontent.com/Jason-Glover/flask-aws-storage/master/1964037.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+</style>
+    <div class="content" style="color: Red;">
       <h1>Upload your files to the AWS S3 Bucket. Glover Version 2</h1>
       <div>
         <h3>Upload your file here:</h3>
         <form method="POST" action="/upload" enctype=multipart/form-data>
           <input type=file name=file>
           <input type=submit value=Upload>
+          
         </form>
       </div>
     </div>
