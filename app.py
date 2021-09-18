@@ -3,6 +3,7 @@ from flask import Flask, render_template, request, redirect, send_file
 from s3_functions import list_files, upload_file, show_image
 from werkzeug.utils import secure_filename
 
+url = os.environ['HTTP_HOST']
 app = Flask(__name__)
 UPLOAD_FOLDER = "uploads"
 BUCKET = "lats-image-data"
@@ -23,8 +24,7 @@ def upload():
         f = request.files['file']
         f.save(os.path.join(UPLOAD_FOLDER, secure_filename(f.filename)))
         upload_file(f"uploads/{f.filename}", BUCKET)
-        return redirect("/")
+        return redirect(url)
 
 if __name__ == '__main__':
     app.run(debug=True)
-    
