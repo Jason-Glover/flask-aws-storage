@@ -6,7 +6,8 @@ from werkzeug.utils import secure_filename
 app = Flask(__name__)
 UPLOAD_FOLDER = "uploads"
 #BUCKET = "img-mgr-docker-6440"
-BUCKET = os.environ('BUCKET_NAME')
+with suppress(Exception):
+    BUCKET = os.environ('BUCKET_NAME')
 
 @app.route("/")
 def home():
