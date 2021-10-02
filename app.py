@@ -1,14 +1,19 @@
 import os
 from flask import Flask, render_template, request, redirect, send_file
-from s3_functions import list_files, upload_file, show_image
+from s3_functions import create_bucket, filter_bucket, list_bucket, list_files, upload_file, show_image
 from werkzeug.utils import secure_filename
-from contextlib import suppress
 
 app = Flask(__name__)
 UPLOAD_FOLDER = "uploads"
-#BUCKET = "img-mgr-docker-6440"
-with suppress(Exception):
-    BUCKET = os.environ('BUCKET_NAME')
+try:
+    BUCKET = os.environ['BUCKET_NAME']
+except:
+    ALLBUCKETS = list_bucket()
+    BUCKET = filter_bucket(ALLBUCKETS)
+    if BUCKET == None:
+        create_bucket()
+        BUCKET = list_bucket
+        
 
 @app.route("/")
 def home():
@@ -27,7 +32,9 @@ def upload():
         f.save(os.path.join(UPLOAD_FOLDER, secure_filename(f.filename)))
         upload_file(f"uploads/{f.filename}", BUCKET)
         return render_template('index.html')
+@app.route('/verify')
+def verify():
+        return '<p>' + BUCKET + '</p>'
 
 if __name__ == '__main__':
     app.run(debug=True)
-    
