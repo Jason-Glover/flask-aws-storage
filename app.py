@@ -2,6 +2,7 @@ import os
 from flask import Flask, render_template, request, redirect, send_file
 from s3_functions import list_files, upload_file, show_image
 from werkzeug.utils import secure_filename
+from contextlib import suppress
 
 app = Flask(__name__)
 UPLOAD_FOLDER = "uploads"
