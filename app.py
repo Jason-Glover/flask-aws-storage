@@ -3,19 +3,13 @@ from flask import Flask, render_template, request, redirect, send_file
 from s3_functions import list_files, upload_file, show_image
 from werkzeug.utils import secure_filename
 
-# Uncomment Lines 7 - 12 for Docker Version
-#app = Flask(__name__)
-#UPLOAD_FOLDER = "uploads"
-#try:
-#    BUCKET = os.environ['BUCKET_NAME']
-#except:
-#    BUCKET = 'ThisIsMyTest'
- 
-# Comment out Lines 15 - 17 if using Docker    
 app = Flask(__name__)
 UPLOAD_FOLDER = "uploads"
-BUCKET = "tempbucket"
-
+try:
+    BUCKET = os.environ['BUCKET_NAME']
+except:
+    BUCKET = 'ThisIsMyTest'
+ 
 @app.route("/")
 def home():
     contents = list_files(BUCKET)
