@@ -31,3 +31,4 @@ def show_image(bucket):
         pass
     # print("[DATA] : The contents inside show_image = ", public_urls)
     return public_urls
+    
