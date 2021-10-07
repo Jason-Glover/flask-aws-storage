@@ -13,8 +13,8 @@ from werkzeug.utils import secure_filename
  
 # Comment out Lines 15 - 17 if using Docker    
 app = Flask(__name__)
-UPLOAD_FOLDER = 'uploads'
-BUCKET = 'temp_bucket'
+UPLOAD_FOLDER = "uploads"
+BUCKET = "tempbucket"
 
 @app.route("/")
 def home():
